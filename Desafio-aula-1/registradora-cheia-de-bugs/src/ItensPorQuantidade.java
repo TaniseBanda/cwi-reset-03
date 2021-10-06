@@ -1,25 +1,37 @@
 public class ItensPorQuantidade {
 
-        static  int pao = 60;
-        static int torta = 64;
-        static int sanduiche = 20;
-        static int leite = 20;
-        static int cafe = 20;
+    static int pao = 60;
+    static int torta = 64;
+    static int sanduiche = 20;
+    static int leite = 20;
+    static int cafe = 20;
 
+    static int getEstoque(String item) {
+        if ("pao".equals(item)) {
+            return ItensPorQuantidade.pao;
+        }
+        if ("torta".equals(item)) {
+            return ItensPorQuantidade.torta;
+        }
+        if ("sanduiche".equals(item)) {
+            return ItensPorQuantidade.sanduiche;
+        }
+        return 0;
+    }
 
     static void setEstoque(String item, int quantidade) {
         if ("pao".equals(item)) {
             ItensPorQuantidade.pao = ItensPorQuantidade.pao + quantidade;
         }
         if ("torta".equals(item)) {
-            ItensPorQuantidade.torta = ItensPorQuantidade.torta+ quantidade;
+            ItensPorQuantidade.torta = ItensPorQuantidade.torta + quantidade;
         }
         if ("sanduiche".equals(item)) {
             ItensPorQuantidade.sanduiche = ItensPorQuantidade.sanduiche + quantidade;
         }
     }
 
-    static void setDia(){
+    static void setDia() {
         ItensPorQuantidade.pao = 60;
         ItensPorQuantidade.torta = 64;
         ItensPorQuantidade.sanduiche = 20;
