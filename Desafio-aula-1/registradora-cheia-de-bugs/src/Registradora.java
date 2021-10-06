@@ -2,16 +2,22 @@
 public class Registradora {
 
     public static void main(String[] args) {
+        ItensPorQuantidade.setDia();
         primeiroBug();
 
+        ItensPorQuantidade.setDia();
         segundoBug();
 
+        ItensPorQuantidade.setDia();
         terceiroBug();
 
+        ItensPorQuantidade.setDia();
         quartoBug();
 
+        ItensPorQuantidade.setDia();
         quintoBug();
 
+        ItensPorQuantidade.setDia();
         sextoBug();
     }
 
@@ -22,6 +28,7 @@ public class Registradora {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     System.out.println("Cozinha fechada!");
+                    precoItem = 0;
                 }
                 ReposicaoCozinha.reporItem(item);
             }
@@ -29,6 +36,9 @@ public class Registradora {
             if ("leite".equals(item) || "cafe".equals(item)) {
                 ReposicaoFornecedor.reporItem(item);
             }
+        }
+        if (precoItem != 0){
+            ItensPorQuantidade.setEstoque(item,-quantidade);
         }
 
         return precoItem;

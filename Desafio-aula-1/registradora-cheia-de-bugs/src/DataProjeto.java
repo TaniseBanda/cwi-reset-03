@@ -21,7 +21,6 @@ public class DataProjeto {
         Random random = new Random();
         int hora = random.nextInt(6);
         int minuto = random.nextInt(60);
-
         return new DataProjeto(true, hora, minuto);
     }
 

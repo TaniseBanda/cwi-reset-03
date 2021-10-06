@@ -4,11 +4,11 @@ public class RelacaoPesoPreco {
         double precoTotal = 0;
 
         if ("pao".equals(item)) {
-            precoTotal = 12.75 * (qtd * 60 / 1000);
+            precoTotal = 12.75 * ((double)qtd * (double)60 / (double)1000);
         }
 
         if ("torta".equals(item)) {
-            precoTotal = 96.00 * (qtd / 16);
+            precoTotal = 96.00 *  ((double)qtd / (double)16);
         }
 
         if ("leite".equals(item)) {
