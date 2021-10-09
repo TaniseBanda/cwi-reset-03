@@ -1,28 +1,25 @@
 public class Filme {
-     private String nome;
+    private String nome;
     private String descricao;
-     private int duração;
-     private int anoLancamento;
-     private String nomeDiretor;
+    private Integer duracao;
+    private Integer anoLancamento;
+    private Double avaliacao;
+    private Diretor diretor;
 
-     //construtor
-    public Filme(String nome, String descricao, int duração, int anoLancamento, String nomeDiretor) {
+    public Filme(String nome, String descricao, Integer duracao, Integer anoLancamento, Double avaliacao, Diretor diretor) {
         this.nome = nome;
         this.descricao = descricao;
-        this.duração = duração;
+        this.duracao = duracao;
         this.anoLancamento = anoLancamento;
-        this.nomeDiretor = nomeDiretor;
+        this.avaliacao = avaliacao;
+        this.diretor = diretor;
     }
 
     public void reproduzir() {
-        return System.out.println ("Nome do filme : " + this.nome + "\n" + "Descrição do filme : " + this.descricao + "\n" + "Tempo de duração do filme : " + this.duracao + "\n" + "Nome do diretor do filme : " + this.nomeDiretor);
+        System.out.println("Nome Filme: " + nome);
+        System.out.println("Descriçao: " + descricao);
+        System.out.println("Duração: " + duracao);
+        System.out.println("Diretor: " + diretor.getNome());
     }
-
-
-    //avaliacao
-
-    //dados do diretor
-
-
 
 }
