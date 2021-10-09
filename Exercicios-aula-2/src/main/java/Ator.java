@@ -1,23 +1,20 @@
 public class Ator {
     private String nome;
     private Integer idade;
-    private Integer numOscars;
-    private String descricao;
+    private Integer numeroOscars;
+    private Genero genero;
 
-    public Ator(String nome, Integer idade, Integer numOscars, String descricao) {
+    public Ator(String nome, Integer idade, Integer numeroOscars, Genero genero) {
         this.nome = nome;
         this.idade = idade;
-        this.numOscars = numOscars;
-        this.descricao = descricao;
-    }
-    public enum Genero {
-        MASCULINO ("Masculino"),
-        FEMININO ("Feminino"),
-        NAO_BINARIO ("Não Binário");
+        this.numeroOscars = numeroOscars;
+        this.genero = genero;
     }
 
-    public String getGenero() {
-        return descricao;
+    public void imprimirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("Genero: " + genero.getDescricao());
     }
 
 }

@@ -16,7 +16,7 @@ public class Filme {
     }
 
     public void reproduzir() {
-        System.out.println("Nome Filme: " + nome);
+        System.out.println("\nNome Filme: " + nome);
         System.out.println("Descriçao: " + descricao);
         System.out.println("Duração: " + duracao);
         System.out.println("Diretor: " + diretor.getNome());
