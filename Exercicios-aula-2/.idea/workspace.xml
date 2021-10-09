@@ -8,8 +8,10 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/Diretor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Aplicacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Aplicacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Filme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Filme.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
