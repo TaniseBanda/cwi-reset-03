@@ -20,6 +20,15 @@ public class Filme {
         System.out.println("Descriçao: " + descricao);
         System.out.println("Duração: " + duracao);
         System.out.println("Diretor: " + diretor.getNome());
+        System.out.println("Avaliacao: " + avaliacao);
+    }
+
+    public void avaliar(double avaliacao) throws AvaliacaoForaDoPadraoException {
+        if (!(avaliacao >= 0 && avaliacao <= 5)) {
+            throw new AvaliacaoForaDoPadraoException();
+        }
+
+        avaliacao = avaliacao;
     }
 
 }
