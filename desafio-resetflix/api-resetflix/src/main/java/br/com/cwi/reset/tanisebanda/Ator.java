@@ -3,6 +3,9 @@ package br.com.cwi.reset.tanisebanda;
 import java.time.LocalDate;
 
 public class Ator {
+
+    private static int idAtor = 0;
+
     private Integer id;
     private String nome;
     private LocalDate dataNascimento;
@@ -10,12 +13,16 @@ public class Ator {
     private Integer anoInicioAtividade;
 
     public Ator(Integer id, String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
-        this.id = id;
+        this.id = idAtor++;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
     }
 
+
+    public String getNome() {
+        return this.nome;
+    }
 
 }
