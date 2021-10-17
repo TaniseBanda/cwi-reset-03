@@ -1,19 +1,15 @@
 package br.com.cwi.reset.tanisebanda;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-public class AtorRequest {
-
+public class DiretorRequest {
     private String nome;
     private LocalDate dataNascimento;
-    private StatusCarreira statusCarreira;
     private Integer anoInicioAtividade;
 
-    public AtorRequest (String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
+    public DiretorRequest(String nome, LocalDate dataNascimento, Integer anoInicioAtividade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
     }
 
@@ -23,10 +19,6 @@ public class AtorRequest {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
-    }
-
-    public StatusCarreira getStatusCarreira() {
-        return statusCarreira;
     }
 
     public Integer getAnoInicioAtividade() {
@@ -41,16 +33,8 @@ public class AtorRequest {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setStatusCarreira(StatusCarreira statusCarreira) {
-        this.statusCarreira = statusCarreira;
-    }
-
     public void setAnoInicioAtividade(Integer anoInicioAtividade) {
         this.anoInicioAtividade = anoInicioAtividade;
     }
-
-    //classe onde vai receber os dados do ator para salvar os dados
-
 }
-
 

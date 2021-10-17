@@ -12,75 +12,47 @@ public class AtorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    // objetivo desta classe é incluir um novo ator na lista de atores que esta na classe AtorRequest
-
-    List<Ator> listaAtores =  new ArrayList<>();
-
-
-    // sei que nao esta certo...
-    // como validar os campos e todas exceptions antes de criar o ator?
-    // uso o mesmo metodo de criar ator? (acho que sim)
-    // como busco os campos (atributo herança de outra classe)???? AtorService tb extend Ator e tem metodo constructor?
-
-    public void criarAtor(AtorRequest atorRequest) {
-        listaAtores.add(atorRequest);
-    }
-
-    public void validaCampoNome throws CampoObrigatorioException {
-        if (nome == null) {
-            String campo = "Nome";
-            throw new CampoObrigatorioException();
+    public void criarAtor(AtorRequest atorRequest) throws Exception {
+       if (atorRequest.getNome() == null){
+           throw new Exception(("\"Campo obrigatório não informado. Favor informar o campo nome."));
+       }
+        if (atorRequest.getDataNascimento() == null){
+            throw new Exception(("\"Campo obrigatório não informado. Favor informar o campo dataNascimento."));
         }
-        return nome;
-    }
-
-    public void validaCampoDataNascimento throws CampoObrigatorioException {
-        if (dataNascimento == null) {
-            String campo = "Data de Nascimento";
-            throw new CampoObrigatorioException();
+        if (atorRequest.getStatusCarreira() == null){
+            throw new Exception(("\"Campo obrigatório não informado. Favor informar o campo statusCarreira."));
         }
-        return dataNascimento;
-    }
-
-    public void validaCampoStatusCarreira throws CampoObrigatorioException {
-        if (statusCarreira == null) {
-            String campo = "Status Carreira";
-            throw new CampoObrigatorioException();
+        if (atorRequest.getAnoInicioAtividade() == null){
+            throw new Exception(("\"Campo obrigatório não informado. Favor informar o campo anoInicioAtividade."));
         }
-        return statusCarreira;
-}
 
-    public void validaCampoAnoInicioAtividade throws CampoObrigatorioException {
-        if (anoInicioAtividade == null) {
-            String campo = "Ano Inicio Atividade";
-            throw new CampoObrigatorioException();
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+
+        if (atorRequest.getNome().split(" ").length < 2) {
+            throw new Exception("Deve ser informado no mínimo nome e sobrenome para o ator.");
         }
-        return anoInicioAtividade;
-    }
 
-    public void validaDataNascimento throws ValidaDataNascimentoException {
-        if (!(dataNascimento.isBefore(LocalDate.now()))) {
-            throw new ValidaDataNascimentoException();
+        if (!(atorRequest.getDataNascimento().isBefore(LocalDate.now()))) {
+            throw new Exception("Não é possível cadastrar atores não nascidos.");
         }
-        return dataNascimento;
-    }
 
-    public void validaAnoInicioAtividade throws ValidaAnoInicioAtividadeException {
-        LocalDate current_date = LocalDate.now();
-        int current_Year = current_date.getYear();
-        if (anoInicioAtividade < current_date.getYear()) {
-            throw new ValidaAnoInicioAtividadeException();
+        Integer anoNascimento = atorRequest.getDataNascimento().getYear();
+        if (atorRequest.getAnoInicioAtividade() < anoNascimento){
+            throw new Exception("Ano de início de atividade inválido para o ator cadastrado.");
         }
-        return anoInicioAtividade;
+
+        for (Ator atoresCadastrados: atores) {
+            if (atoresCadastrados.getNome().equalsIgnoreCase(atorRequest.getNome())) {
+                throw new Exception (String.format("Já existe um ator cadastrado para o nome %s." + atorRequest.getNome()));
+            }
+        }
+
+        Integer idGerado = atores.size() + 1;
+
+        Ator ator = new Ator(idGerado, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
+
+        fakeDatabase.persisteAtor(ator);
     }
 
-
-    // List<String> listaAtores =  new ArrayList<>();
-    // listaAtores.add(onde pego os dados do ator adicionado?)
-
-    public void campoNome (String nome)  {
-
-
-    }
 
 }

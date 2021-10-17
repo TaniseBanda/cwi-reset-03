@@ -13,7 +13,7 @@ public class Ator {
     private Integer anoInicioAtividade;
 
     public Ator(Integer id, String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
-        this.id = idAtor++;
+        this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.statusCarreira = statusCarreira;
@@ -36,4 +36,27 @@ public class Ator {
         return anoInicioAtividade;
     }
 
+    public static void setIdAtor(int idAtor) {
+        Ator.idAtor = idAtor;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setStatusCarreira(StatusCarreira statusCarreira) {
+        this.statusCarreira = statusCarreira;
+    }
+
+    public void setAnoInicioAtividade(Integer anoInicioAtividade) {
+        this.anoInicioAtividade = anoInicioAtividade;
+    }
 }
