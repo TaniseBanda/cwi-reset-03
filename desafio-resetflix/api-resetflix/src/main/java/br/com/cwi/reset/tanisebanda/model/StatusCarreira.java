@@ -1,4 +1,4 @@
-package br.com.cwi.reset.tanisebanda;
+package br.com.cwi.reset.tanisebanda.model;
 
 public enum StatusCarreira {
     EM_ATIVIDADE,

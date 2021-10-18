@@ -1,12 +1,17 @@
 package br.com.cwi.reset.tanisebanda;
 
+import br.com.cwi.reset.tanisebanda.model.Ator;
+import br.com.cwi.reset.tanisebanda.model.StatusCarreira;
+import br.com.cwi.reset.tanisebanda.request.AtorRequest;
+import br.com.cwi.reset.tanisebanda.service.AtorService;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
 public class Aplicacao {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         FakeDatabase fakeDatabase = new FakeDatabase();
 
         AtorService atorService = new AtorService(fakeDatabase);
@@ -17,7 +22,7 @@ public class Aplicacao {
         Integer anoInicioAtividade = 1986;
         AtorRequest atorRequest = new AtorRequest(nome, dataNascimento, statusCarreira, anoInicioAtividade);
 
-        //atorService.criarAtor(atorRequest);
+        atorService.criarAtor(atorRequest);
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 

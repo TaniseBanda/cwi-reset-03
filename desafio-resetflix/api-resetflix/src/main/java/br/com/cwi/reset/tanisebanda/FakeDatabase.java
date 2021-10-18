@@ -1,5 +1,8 @@
 package br.com.cwi.reset.tanisebanda;
 
+import br.com.cwi.reset.tanisebanda.model.Ator;
+import br.com.cwi.reset.tanisebanda.model.Diretor;
+
 import java.util.ArrayList;
 import java.util.List;
 

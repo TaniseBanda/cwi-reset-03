@@ -1,4 +1,4 @@
-package br.com.cwi.reset.tanisebanda;
+package br.com.cwi.reset.tanisebanda.model;
 
 import java.time.LocalDate;
 
@@ -17,5 +17,9 @@ public class Diretor {
 
     public String getNome() {
         return nome;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
