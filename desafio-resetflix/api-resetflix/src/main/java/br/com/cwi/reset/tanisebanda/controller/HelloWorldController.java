@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello-world")
 public class HelloWorldController {
     
-    @PostMapping
-    public String helloWorld() throws Exception {
-        throw new NomeNaoInformadoException();
-        //return "Minha API resetflix está UP!!!";
+    @GetMapping
+    public String helloWorld() {
+        return "Minha API resetflix está UP!!!";
     }
 }
