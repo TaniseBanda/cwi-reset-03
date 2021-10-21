@@ -2,8 +2,6 @@ package br.com.cwi.reset.tanisebanda.model;
 
 public class PersonagemAtor {
 
-    //List
-
     private Integer id;
     private Ator ator;
     private String nomePersonagem;

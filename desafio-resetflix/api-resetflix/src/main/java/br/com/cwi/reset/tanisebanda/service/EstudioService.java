@@ -2,7 +2,6 @@ package br.com.cwi.reset.tanisebanda.service;
 
 import br.com.cwi.reset.tanisebanda.FakeDatabase;
 import br.com.cwi.reset.tanisebanda.exception.*;
-import br.com.cwi.reset.tanisebanda.model.Diretor;
 import br.com.cwi.reset.tanisebanda.model.Estudio;
 import br.com.cwi.reset.tanisebanda.request.EstudioRequest;
 

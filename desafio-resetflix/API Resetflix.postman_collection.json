@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "61f7d4eb-b58f-4d94-9071-5a42d861c546",
+		"name": "API Resetflix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Elenco",
+			"item": [
+				{
+					"name": "Cadastrar ator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Tanise Banda\",\r\n    \"dataNascimento\": \"1978-07-26\",\r\n    \"statusCarreira\": \"EM_ATIVIDADE\",\r\n    \"anoInicioAtividade\": 1999\r\n}\r\n{\r\n    \"nome\": \"Laura Melo\",\r\n    \"dataNascimento\": \"2015-05-05\",\r\n    \"statusCarreira\": \"EM_ATIVIDADE\",\r\n    \"anoInicioAtividade\": 2010\r\n}\r\n{\r\n    \"nome\": \"Fabio Luiz Melo\",\r\n    \"dataNascimento\": \"2015-05-05\",\r\n    \"statusCarreira\": \"EM_ATIVIDADE\",\r\n    \"anoInicioAtividade\": 2010\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/atores",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar atores em atividade",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar ator (id)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/atores",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos os atores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Direção",
+			"item": [
+				{
+					"name": "Cadastrar diretor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Melissa Melo\",\r\n    \"dataNascimento\": \"2019-02-14\",\r\n    \"anoInicioAtividade\": 2019\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/diretores",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"diretores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar diretores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/diretores",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"diretores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar diretor (id)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/diretores/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"diretores",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estúdio",
+			"item": [
+				{
+					"name": "Cadastrar Estúdio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"descricao\":\"\",\r\n    \"dataCriacao\": \"AAAA-MM-DD\",\r\n    \"statusAtividade\":\"EM-ATIVIDADE\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/estudios",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Estúdio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/estudios",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Estúdio (id)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/estudios/{id}?id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudios",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filmes",
+			"item": [
+				{
+					"name": "Cadastrar Filmes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"anoLancamento\":\"\",\r\n    \"capaFilme\":\"\",\r\n    \"generos\":\"ACAO\",\r\n    \"diretor\":{\r\n        \"id\":\r\n    },\r\n    \"estudio\":{\r\n        \"id\":\r\n    },\r\n    \"resumo\":\"\",\r\n    \"personagens\":{\r\n    \"idAtor\":,\r\n    \"nomePersonagem\":\"\",\r\n    \"descricaoPersonagem\":\"\",\r\n    \"tipoAtuacao\":\"PRINCIPAL\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/filmes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"filmes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Filmes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/filmes?nomeFilme&nomeDiretor&nomePersonagem&nomeAtor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"filmes"
+							],
+							"query": [
+								{
+									"key": "nomeFilme",
+									"value": null
+								},
+								{
+									"key": "nomeDiretor",
+									"value": null
+								},
+								{
+									"key": "nomePersonagem",
+									"value": null
+								},
+								{
+									"key": "nomeAtor",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

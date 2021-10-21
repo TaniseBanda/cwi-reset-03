@@ -1,6 +1,5 @@
 package br.com.cwi.reset.tanisebanda.request;
 
-import br.com.cwi.reset.tanisebanda.model.Ator;
 import br.com.cwi.reset.tanisebanda.model.TipoAtuacao;
 
 public class PersonagemRequest {

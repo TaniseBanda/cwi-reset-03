@@ -3,7 +3,6 @@ package br.com.cwi.reset.tanisebanda.request;
 import br.com.cwi.reset.tanisebanda.model.Diretor;
 import br.com.cwi.reset.tanisebanda.model.Estudio;
 import br.com.cwi.reset.tanisebanda.model.Genero;
-import br.com.cwi.reset.tanisebanda.model.PersonagemAtor;
 
 import java.time.LocalDate;
 import java.util.List;
