@@ -2,6 +2,7 @@ package br.com.cwi.reset.tanisebanda.service;
 
 import br.com.cwi.reset.tanisebanda.FakeDatabase;
 import br.com.cwi.reset.tanisebanda.exception.*;
+import br.com.cwi.reset.tanisebanda.model.Diretor;
 import br.com.cwi.reset.tanisebanda.model.Estudio;
 import br.com.cwi.reset.tanisebanda.request.EstudioRequest;
 
@@ -16,7 +17,7 @@ public class EstudioService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarEstudio (EstudioRequest estudioRequest) throws Exception {
+    public void criarEstudio (EstudioRequest estudioRequest) throws Exception {
         if (estudioRequest.getNome() == null){
             throw new NomeNaoInformadoException();
         }
@@ -49,7 +50,7 @@ public class EstudioService {
         fakeDatabase.persisteEstudio(estudio);
     }
 
-    public List<Estudio> consultarEstudios() throws Exception {
+    public List<Estudio> consultarEstudios(final String filtroNome) throws Exception {
         final List<Estudio> estudios = fakeDatabase.recuperaEstudios();
 
         if (estudios.isEmpty()) {
