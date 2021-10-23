@@ -2,97 +2,168 @@ package br.com.cwi.reset.tanisebanda.service;
 
 import br.com.cwi.reset.tanisebanda.FakeDatabase;
 import br.com.cwi.reset.tanisebanda.exception.CampoNaoInformadoException;
+import br.com.cwi.reset.tanisebanda.exception.ListaVaziaException;
 import br.com.cwi.reset.tanisebanda.exception.NomeNaoInformadoException;
-import br.com.cwi.reset.tanisebanda.model.Ator;
-import br.com.cwi.reset.tanisebanda.model.Estudio;
+import br.com.cwi.reset.tanisebanda.exception.TipoDominioException;
 import br.com.cwi.reset.tanisebanda.model.Filme;
+import br.com.cwi.reset.tanisebanda.model.Genero;
 import br.com.cwi.reset.tanisebanda.model.PersonagemAtor;
 import br.com.cwi.reset.tanisebanda.request.FilmeRequest;
 
-import java.util.List;
+import java.util.*;
+
+import static java.util.Objects.isNull;
+import static java.util.Optional.ofNullable;
 
 public class FilmeService {
 
     private FakeDatabase fakeDatabase;
+    private DiretorService diretorService;
+    private EstudioService estudioService;
+    private PersonagemAtorService personagemAtorService;
 
     public FilmeService(FakeDatabase fakeDatabase) {
         this.fakeDatabase = fakeDatabase;
+        this.diretorService = diretorService(fakeDatabase);
+        this.estudioService = estudioService(fakeDatabase);
+        this.personagemAtorService = personagemAtorService(fakeDatabase);
     }
 
-    private AtorService atorService;
-    private DiretorService diretorService;
-    private EstudioService estudioService;
+    public void criarFilme(FilmeRequest filmeRequest) throws Exception {
+        final List<Filme> filmesCadastrados = fakeDatabase.recuperaFilmes();
 
+        final Integer idGerado = filmesCadastrados.size() + 1;
 
-    public FilmeService(FakeDatabase fakeDatabase, AtorService atorService, DiretorService diretorService, EstudioService estudioService) {
-        this.fakeDatabase = fakeDatabase;
-        this.atorService = new AtorService(FakeDatabase.getInstance());
-        this.diretorService = new DiretorService(FakeDatabase.getInstance());
-        this.estudioService = new EstudioService(FakeDatabase.getInstance());
+        final Filme filme = new Filme(
+                idGerado,
+                ofNullable(filmeRequest.getNome()).orElseThrow(() -> new NomeNaoInformadoException()),
+                ofNullable(filmeRequest.getAnoLancamento()).orElseThrow(() -> new CampoNaoInformadoException("AnoLancamento")),
+                ofNullable(filmeRequest.getCapaFilme()).orElseThrow(() -> new CampoNaoInformadoException("capaFilme")),
+                ofNullable(filmeRequest.getGeneros()).orElseThrow(() -> new CampoNaoInformadoException("genero")),
+                estudioService.consultarEstudio(filmeRequest.getIdEstudio()),
+                diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
+                personagemAtorService.cadastrarPersonagensFilme(filmeRequest.getPersonagens()),
+                ofNullable(filmeRequest.getResumo()).orElseThrow(() -> new CampoNaoInformadoException("resumo"))
+        );
 
+            if (filme.getGeneros().isEmpty()) {
+                throw new Exception("Deve ser informado pelo menos um gênero para o cadastro do filme.");
+            }
+
+            final Set<Genero> generoSet = new HashSet<>();
+
+            for (Genero genero : filme.getGeneros()) {
+                if (generoSet.contains(genero)) {
+                    throw new Exception("Não é permitido informar o mesmo gênero mais de uma vez para o mesmo filme.");
+                } else {
+                    generoSet.add(genero);
+                }
+            }
+
+            fakeDatabase.persisteFilme(filme);
+        }
+
+        public List<Filme> consultarFilmes(
+                String nomeFilme,
+                String nomeDiretor,
+                String nomePersonagem,
+                String nomeAtor) throws Exception {
+            final List<Filme> filmesCadastrados = fakeDatabase.recuperaFilmes();
+
+            if (filmesCadastrados.isEmpty()) {
+                throw new ListaVaziaException(TipoDominioException.FILME.getSingular(), TipoDominioException.FILME.getPlural());
+            }
+
+            final List<Filme> filtrarNomePersonagem = filtrarNomePersonagem(filmesCadastrados, nomePersonagem);
+            final List<Filme> filtrarNomeAtor = filtrarNomeAtor(filtrarNomePersonagem, nomeAtor);
+            final List<Filme> filtrarNomeDiretor = filtrarNomeDiretor(filtrarNomeAtor, nomeDiretor);
+            final List<Filme> filtroFinal = filtrarNomeFilme(filtrarNomeDiretor, nomeFilme);
+
+            if (filtroFinal.isEmpty()) {
+                throw new Exception(
+                        String.format(
+                                "Filme não encontrado com os filtros nomeFilme=%s, nomeDiretor=%s, nomePersonagem=%s, nomeAtor=%s, favor informar outros filtros.",
+                                nomeFilme,
+                                nomeDiretor,
+                                nomePersonagem,
+                                nomeAtor
+                        )
+                );
+            }
+
+            return filtroFinal;
+        }
+
+        private List<Filme> filtrarNomeFilme(final List<Filme> listaOriginal, final String nome) {
+            if (isNull(nome)) {
+                return listaOriginal;
+            }
+
+            final List<Filme> filmeFiltrado = new ArrayList<>();
+
+            for (Filme filme : listaOriginal) {
+                if (filme.getNome().toLowerCase(Locale.ROOT).equalsIgnoreCase(nome.toLowerCase(Locale.ROOT))) {
+                    filmeFiltrado.add(filme);
+                }
+            }
+
+            return filmeFiltrado;
+        }
+
+        private List<Filme> filtrarNomeDiretor(final List<Filme> listaOriginal, final String nome) {
+            if (isNull(nome)) {
+                return listaOriginal;
+            }
+
+            final List<Filme> filmeFiltrado = new ArrayList<>();
+
+            for (Filme filme : listaOriginal) {
+                if (filme.getDiretor().getNome().toLowerCase(Locale.ROOT).equalsIgnoreCase(nome.toLowerCase(Locale.ROOT))) {
+                    filmeFiltrado.add(filme);
+                }
+            }
+
+            return filmeFiltrado;
+        }
+
+        private List<Filme> filtrarNomeAtor(final List<Filme> listaOriginal, final String nome) {
+            if (isNull(nome)) {
+                return listaOriginal;
+            }
+
+            final List<Filme> filmeFiltrado = new ArrayList<>();
+
+            for (Filme filme : listaOriginal) {
+                for (PersonagemAtor personagens : filme.getPersonagens()) {
+                    if (personagens.getAtor().getNome().toLowerCase(Locale.ROOT).equalsIgnoreCase(nome.toLowerCase(Locale.ROOT))) {
+                        filmeFiltrado.add(filme);
+                        break;
+                    }
+                }
+            }
+
+            return filmeFiltrado;
+        }
+
+        private List<Filme> filtrarNomePersonagem(final List<Filme> listaOriginal, final String nome) {
+            if (isNull(nome)) {
+                return listaOriginal;
+            }
+
+            final List<Filme> filmeFiltrado = new ArrayList<>();
+
+            for (Filme filme : listaOriginal) {
+                for (PersonagemAtor personagens : filme.getPersonagens()) {
+                    if (personagens.getNomePersonagem()
+                            .toLowerCase(Locale.ROOT)
+                            .equalsIgnoreCase(nome.toLowerCase(Locale.ROOT))
+                    ) {
+                        filmeFiltrado.add(filme);
+                        break;
+                    }
+                }
+            }
+
+            return filmeFiltrado;
+        }
     }
-
-    public void criarFilme (FilmeRequest filmeRequest) throws Exception {
-        if (filmeRequest.getNome() == null) {
-            throw new NomeNaoInformadoException();
-        }
-        if (filmeRequest.getAnoLancamento() == null) {
-            throw new CampoNaoInformadoException("anoLancamento");
-
-        }
-        if (filmeRequest.getCapaFilme() == null) {
-            throw new CampoNaoInformadoException("capaFilme");
-        }
-        if (filmeRequest.getGeneros() == null) {
-            throw new CampoNaoInformadoException("genero");
-        }
-        if (filmeRequest.getResumo() == null) {
-            throw new CampoNaoInformadoException("resumo");
-        }
-
-        /* Faltou incluir nas exceções campos obrigatorios:
-        idDiretor*
-        idEstudio*
-        List< PersonagemRequest > personagens*
-              idAtor*
-              nomePersonagem*
-              descricaoPersonagem*
-              TipoAtuacao tipoAtuacao*
-                  PRINCIPAL
-                  COADJUVANTE
-
-          // e demais exceções:
-            1 - Caso não exista nenhum estúdio cadastrado para o id informado deve retornar erro
-                Mensagem de erro: "Nenhum estúdio encontrado com o parâmetro id={id}, favor verifique os parâmetros informados."
-            2 - Caso não exista nenhum diretor cadastrado para o id informado deve retornar erro
-                Mensagem de erro: "Nenhum diretor encontrado com o parâmetro id={id}, favor verifique os parâmetros informados."
-            3 - Caso não exista nenhum ator cadastrado para o id informado deve retornar erro
-                Mensagem de erro: "Nenhum ator encontrado com o parâmetro id={id}, favor verifique os parâmetros informados."
-            4 - É obrigatório informar pelo menos um gênero na lista, caso não informado deve retornar erro:
-                Mensagem de erro: "Deve ser informado pelo menos um gênero para o cadastro do filme."
-            5 - Não é permitido cadastrar filmes que apresentem duas vezes o mesmo gênero na lista informada na requisição, caso encontrado gêneros duplicados deve retornar mensagem de erro, exemplo:
-                List< Generos > generos : ["ACAO", "TERROR", "COMEDIA", "ACAO"] | não permitido
-                List< Generos > generos : ["ACAO", "TERROR", "COMEDIA", "ESPIONAGEM"] | permitido
-                Mensagem de erro: "Não é permitido informar o mesmo gênero mais de uma vez para o mesmo filme."
-            6 - Não é permitido cadastrar o mesmo personagem com o mesmo ator mais de uma vez, caso seja informado o mesmo ator para o mesmo personagem deve retornar erro, exemplo:
-                List< PersonagemRequest > personagens : [{"idAtor": 1, "nomePersonagem": "meu personagem"}, {"idAtor": 2, "nomePersonagem": "outro personagem"}, {"idAtor": 1, "nomePersonagem": "meu personagem"}] | não permitido
-                List< PersonagemRequest > personagens : [{"idAtor": 1, "nomePersonagem": "meu personagem"}, {"idAtor": 2, "nomePersonagem": "outro personagem"}, {"idAtor": 3, "nomePersonagem": "meu personagem"}] | permitido
-                List< PersonagemRequest > personagens : [{"idAtor": 1, "nomePersonagem": "meu personagem"}, {"idAtor": 2, "nomePersonagem": "outro personagem"}, {"idAtor": 1, "nomePersonagem": "mais um personagem para o ator 1"}] | permitido
-                Mensagem de erro: "Não é permitido informar o mesmo ator/personagem mais de uma vez para o mesmo filme."
-
-         */
-
-        List<Filme> filmes = fakeDatabase.recuperaFilmes();
-        Integer idGerado = filmes.size() + 1;
-
-        List<PersonagemAtor> personagens = fakeDatabase.recuperaPersonagens();
-        Integer idGeradoPersonagem = personagens.size() + 1;
-
-        //Filme filme = new Filme(idGerado, filmeRequest.getNome(), filmeRequest.getAnoLancamento(), filmeRequest.getCapaFilme(), filmeRequest.getGeneros());
-
-        //fakeDatabase.persisteFilme(filme);
-
-    }
-
-
-}

@@ -2,16 +2,12 @@ package br.com.cwi.reset.tanisebanda.controller;
 
 import br.com.cwi.reset.tanisebanda.FakeDatabase;
 import br.com.cwi.reset.tanisebanda.model.Ator;
-import br.com.cwi.reset.tanisebanda.model.StatusCarreira;
 import br.com.cwi.reset.tanisebanda.request.AtorRequest;
-import br.com.cwi.reset.tanisebanda.service.AtorEmAtividade;
+import br.com.cwi.reset.tanisebanda.response.AtorEmAtividade;
 import br.com.cwi.reset.tanisebanda.service.AtorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

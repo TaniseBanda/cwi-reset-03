@@ -9,21 +9,21 @@ import java.util.List;
 
 public class FilmeRequest {
     private String nome;
-    private LocalDate anoLancamento;
+    private Integer anoLancamento;
     private String capaFilme;
     private List<Genero> generos;
-    private Diretor diretor;
-    private Estudio estudio;
+    private Integer idDiretor;
+    private Integer idEstudio;
     private String resumo;
     private List<PersonagemRequest> personagens;
 
-    public FilmeRequest(String nome, LocalDate anoLancamento, String capaFilme, List<Genero> generos, Diretor diretor, Estudio estudio, String resumo, List<PersonagemRequest> personagens) {
+    public FilmeRequest(String nome, Integer anoLancamento, String capaFilme, List<Genero> generos, Integer IdDiretor, Integer IDEstudio, String resumo, List<PersonagemRequest> personagens) {
         this.nome = nome;
         this.anoLancamento = anoLancamento;
         this.capaFilme = capaFilme;
         this.generos = generos;
-        this.diretor = diretor;
-        this.estudio = estudio;
+        this.idDiretor = idDiretor;
+        this.idEstudio = idEstudio;
         this.resumo = resumo;
         this.personagens = personagens;
     }
@@ -32,7 +32,7 @@ public class FilmeRequest {
         return nome;
     }
 
-    public LocalDate getAnoLancamento() {
+    public Integer getAnoLancamento() {
         return anoLancamento;
     }
 
@@ -44,12 +44,12 @@ public class FilmeRequest {
         return generos;
     }
 
-    public Diretor getDiretor() {
-        return diretor;
+    public Integer getIdDiretor() {
+        return idDiretor;
     }
 
-    public Estudio getEstudio() {
-        return estudio;
+    public Integer getIdEstudio() {
+        return idEstudio;
     }
 
     public String getResumo() {
@@ -64,7 +64,7 @@ public class FilmeRequest {
         this.nome = nome;
     }
 
-    public void setAnoLancamento(LocalDate anoLancamento) {
+    public void setAnoLancamento(Integer anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
 
@@ -76,12 +76,12 @@ public class FilmeRequest {
         this.generos = generos;
     }
 
-    public void setDiretor(Diretor diretor) {
-        this.diretor = diretor;
+    public void setIdDiretor(Integer idDiretor) {
+        this.idDiretor = idDiretor;
     }
 
-    public void setEstudio(Estudio estudio) {
-        this.estudio = estudio;
+    public void setIdEstudio(Integer idEstudio) {
+        this.idEstudio = idEstudio;
     }
 
     public void setResumo(String resumo) {
@@ -91,7 +91,6 @@ public class FilmeRequest {
     public void setPersonagens(List<PersonagemRequest> personagens) {
         this.personagens = personagens;
     }
-
 }
 
 

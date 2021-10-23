@@ -5,6 +5,7 @@ import br.com.cwi.reset.tanisebanda.exception.*;
 import br.com.cwi.reset.tanisebanda.model.Ator;
 import br.com.cwi.reset.tanisebanda.model.StatusCarreira;
 import br.com.cwi.reset.tanisebanda.request.AtorRequest;
+import br.com.cwi.reset.tanisebanda.response.AtorEmAtividade;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

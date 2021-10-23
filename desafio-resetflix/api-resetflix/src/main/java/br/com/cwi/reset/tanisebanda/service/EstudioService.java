@@ -6,7 +6,11 @@ import br.com.cwi.reset.tanisebanda.model.Estudio;
 import br.com.cwi.reset.tanisebanda.request.EstudioRequest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import static java.util.Objects.isNull;
 
 public class EstudioService {
 
@@ -30,11 +34,11 @@ public class EstudioService {
             throw new CampoNaoInformadoException("statusAtividade");
         }
 
-        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        List<Estudio> estudiosCadastrados = fakeDatabase.recuperaEstudios();
 
-        for (Estudio estudiosCadastrados: estudios) {
-            if (estudiosCadastrados.getNome().equalsIgnoreCase(estudioRequest.getNome())) {
-                throw new Exception (String.format("Já existe um estúdio cadastrado para o nome %s." + estudioRequest.getNome()));
+        for (Estudio estudioCadastrados: estudiosCadastrados) {
+            if (estudioCadastrados.getNome().equalsIgnoreCase(estudioRequest.getNome())) {
+                throw new CadastroDuplicadoException(TipoDominioException.ESTUDIO.getSingular(), estudioRequest.getNome());
             }
         }
 
@@ -42,7 +46,7 @@ public class EstudioService {
             throw new Exception("Não é possível cadastrar estúdios do futuro.");
         }
 
-        Integer idGerado = estudios.size() + 1;
+        Integer idGerado = estudiosCadastrados.size() + 1;
 
         Estudio estudio = new Estudio(idGerado, estudioRequest.getNome(), estudioRequest.getDescricao(), estudioRequest.getDataCriacao(), estudioRequest.getStatusAtividade());
 
@@ -50,18 +54,28 @@ public class EstudioService {
     }
 
     public List<Estudio> consultarEstudios(final String filtroNome) throws Exception {
-        final List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        final List<Estudio> estudiosCadastrados = fakeDatabase.recuperaEstudios();
+        final List<Estudio> estudios = new ArrayList<>();
+
+        if (estudiosCadastrados.isEmpty()) {
+            throw new ListaVaziaException(TipoDominioException.ESTUDIO.getSingular(), TipoDominioException.ESTUDIO.getPlural());
+        }
+        if (!isNull(filtroNome)) {
+            for (Estudio estudio : estudiosCadastrados) {
+                if (estudio.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT))) {
+                    estudios.add(estudio);
+                }
+            }
+        } else {
+            estudios.addAll(estudiosCadastrados);
+        }
 
         if (estudios.isEmpty()) {
-            throw new CampoNaoInformadoException("Nenhum estúdio cadastrado, favor cadastar estúdios.");
+            throw new FiltroNomeNaoEncontrado("Estúdio", filtroNome);
         }
+
         return estudios;
     }
-/* Não fiz:
-1 O campo filtroNome é opcional, quando informado deve filtrar por qualquer match na sequência do nome, Exemplo: filtroNome -> vel estúdio encontrado -> Marvel Studios
-3 Caso não seja encontrado nenhum estúdio com o filtro informado deve retornar erro
-Mensagem de erro: "Estúdio não encontrado com o filtro {filtro}, favor informar outro filtro."
- */
 
     public Estudio consultarEstudio(Integer id) throws Exception {
         if (id == null) {
@@ -70,14 +84,17 @@ Mensagem de erro: "Estúdio não encontrado com o filtro {filtro}, favor informa
 
         final List<Estudio> estudios = fakeDatabase.recuperaEstudios();
 
-        for (Estudio estudio : estudios) {
-            if (estudio.getId().equals(id)) {
-                return estudio;
-            }
-        }
-
-        throw new ConsultaIdInvalidoException(TipoDominioException.ESTUDIO.getSingular(), id);
+        return fakeDatabase.recuperaEstudios()
+                .stream().filter(e -> e.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() ->
+                        new ConsultaIdInvalidoException(
+                                TipoDominioException.ESTUDIO.getSingular(),
+                                id)
+                );
     }
+
+
 
 }
 

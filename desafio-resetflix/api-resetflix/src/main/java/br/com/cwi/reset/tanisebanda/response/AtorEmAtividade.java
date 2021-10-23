@@ -1,4 +1,4 @@
-package br.com.cwi.reset.tanisebanda.service;
+package br.com.cwi.reset.tanisebanda.response;
 
 import java.time.LocalDate;
 
@@ -24,5 +24,7 @@ public class AtorEmAtividade {
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
+
+
 }
 
