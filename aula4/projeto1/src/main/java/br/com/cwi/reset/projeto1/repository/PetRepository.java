@@ -8,6 +8,10 @@ import java.util.List;
 
 @Repository
 public interface PetRepository extends CrudRepository<Pet, Integer> {
+
+    Pet findByNomeIgnoringCase(String nome);
+
+    List<Pet> findAll();
 }
 
 /*

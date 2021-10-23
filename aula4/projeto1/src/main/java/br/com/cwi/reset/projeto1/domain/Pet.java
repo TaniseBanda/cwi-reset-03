@@ -16,6 +16,10 @@ public class Pet {
     @ManyToOne(cascade = CascadeType.ALL)
     private Especie especie;
 
+    public Pet() {
+
+    }
+
     public String getNome() {
         return nome;
     }
@@ -38,5 +42,9 @@ public class Pet {
 
     public void setEspecie(Especie especie) {
         this.especie = especie;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
