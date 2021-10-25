@@ -24,9 +24,9 @@ public class FilmeService {
 
     public FilmeService(FakeDatabase fakeDatabase) {
         this.fakeDatabase = fakeDatabase;
-        this.diretorService = diretorService(fakeDatabase);
-        this.estudioService = estudioService(fakeDatabase);
-        this.personagemAtorService = personagemAtorService(fakeDatabase);
+        this.diretorService = new DiretorService(fakeDatabase);
+        this.estudioService = new EstudioService(fakeDatabase);
+        this.personagemAtorService = new PersonagemAtorService(fakeDatabase);
     }
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
@@ -40,8 +40,8 @@ public class FilmeService {
                 ofNullable(filmeRequest.getAnoLancamento()).orElseThrow(() -> new CampoNaoInformadoException("AnoLancamento")),
                 ofNullable(filmeRequest.getCapaFilme()).orElseThrow(() -> new CampoNaoInformadoException("capaFilme")),
                 ofNullable(filmeRequest.getGeneros()).orElseThrow(() -> new CampoNaoInformadoException("genero")),
-                estudioService.consultarEstudio(filmeRequest.getIdEstudio()),
                 diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
+                estudioService.consultarEstudio(filmeRequest.getIdEstudio()),
                 personagemAtorService.cadastrarPersonagensFilme(filmeRequest.getPersonagens()),
                 ofNullable(filmeRequest.getResumo()).orElseThrow(() -> new CampoNaoInformadoException("resumo"))
         );

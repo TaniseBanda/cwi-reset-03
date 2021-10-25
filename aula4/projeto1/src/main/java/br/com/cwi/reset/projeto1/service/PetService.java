@@ -16,7 +16,7 @@ public class PetService {
     private PetRepository repository;
 
     public Pet buscarPeloNome(String nome) throws PetNaoExistenteException {
-        Pet pet = repository.findByNomeIgnoringCase(nome);
+        Pet pet = repository.findByNome(nome);
 
         if (pet == null) {
             throw new PetNaoExistenteException("Pet com o nome " + nome + " não existe");

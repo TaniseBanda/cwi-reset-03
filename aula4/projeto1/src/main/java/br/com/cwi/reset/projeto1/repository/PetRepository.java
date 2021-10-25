@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PetRepository extends CrudRepository<Pet, Integer> {
 
-    Pet findByNomeIgnoringCase(String nome);
+    Pet findByNome(String nome);
 
     List<Pet> findAll();
 }

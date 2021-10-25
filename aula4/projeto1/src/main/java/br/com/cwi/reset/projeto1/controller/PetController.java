@@ -27,7 +27,7 @@ public class PetController {
     }
 
     @GetMapping("/{nome}")
-    public ResponseEntity<Pet> getById(@PathVariable String nome) {
+    public ResponseEntity<Pet> getByNome(@PathVariable String nome) {
         Pet pet = buscarPetPeloNome(nome);
 
         if (pet == null) {
