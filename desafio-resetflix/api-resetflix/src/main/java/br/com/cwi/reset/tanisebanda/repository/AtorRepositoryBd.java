@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tanisebanda.repository;
 
 import br.com.cwi.reset.tanisebanda.model.Ator;
+import br.com.cwi.reset.tanisebanda.model.StatusCarreira;
 import br.com.cwi.reset.tanisebanda.request.AtorRequest;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -20,9 +21,10 @@ public interface AtorRepositoryBd extends CrudRepository<Ator, Integer> {
 
     List<Ator> findByNomeContainingIgnoreCase(String nome);
 
+    List<Ator> findByStatusCarreira(String filtroNome);
 
 /*
-    List<Ator> findByStatusCarreira(String filtroNome);
+    ;
 
     void deleteById (Integer id);
 

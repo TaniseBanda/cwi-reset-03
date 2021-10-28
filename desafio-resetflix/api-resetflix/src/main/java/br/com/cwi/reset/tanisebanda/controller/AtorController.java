@@ -2,6 +2,7 @@ package br.com.cwi.reset.tanisebanda.controller;
 
 
 import br.com.cwi.reset.tanisebanda.model.Ator;
+import br.com.cwi.reset.tanisebanda.model.StatusCarreira;
 import br.com.cwi.reset.tanisebanda.request.AtorRequest;
 import br.com.cwi.reset.tanisebanda.response.AtorEmAtividade;
 import br.com.cwi.reset.tanisebanda.service.AtorService;
@@ -46,16 +47,15 @@ public class AtorController {
     public List<Ator> filtroNome(@PathVariable @Valid String nome) {
         return atorService.filtroNome(nome);
     }
-
- /*
     @GetMapping("/em_atividade")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<AtorEmAtividade> listarAtoresEmAtividade(@Valid String filtroNome) throws Exception {
+    public List<Ator> listarAtoresEmAtividade(@PathVariable @Valid String filtroNome) {
         return atorService.listarAtoresEmAtividade(filtroNome);
     }
 
 
-   // PARTE 3
+ /*
+    // PARTE 3
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void atualizarAtor(@PathVariable @Valid Integer id, @RequestBody @Valid AtorRequest atorRequest) {
@@ -67,10 +67,7 @@ public class AtorController {
      public void removerAtor(@PathVariable @Valid Integer id) {
          atorService.removerAtor(id);
      }
-
-
 */
-
 
 }
 

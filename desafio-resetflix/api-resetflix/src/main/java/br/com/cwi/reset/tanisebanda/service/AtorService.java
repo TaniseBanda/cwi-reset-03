@@ -56,7 +56,7 @@ public class AtorService {
         }
 */
 
-        Ator ator = new Ator( atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
+        Ator ator = new Ator(atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
 
         repository.save(ator);
     }
@@ -76,41 +76,20 @@ public class AtorService {
         return repository.findByNomeContainingIgnoreCase(nome);
     }
 
-/*
-    //Retorno: List | Método: listarAtoresEmAtividade(String filtroNome)
+    //tá compilando mas não deu
     public List<Ator> listarAtoresEmAtividade(String filtroNome) {
-        Ator atoresEmAtividade = repository.findByStatusCarreira(StatusCarreira.EM_ATIVIDADE.equals(repository.findByNome.getStatusCarreira());
-
-        if (atoresCadastrados.isEmpty()) {
-            throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
-        }
-
+        List<Ator> atoresFiltrados = repository.findByNomeContainingIgnoreCase(filtroNome);
         final List<AtorEmAtividade> retorno = new ArrayList<>();
-
-        if (filtroNome != null) {
-            for (Ator ator : atoresCadastrados) {
-                final boolean containsFilter = ator.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
-                final boolean emAtividade = StatusCarreira.EM_ATIVIDADE.equals(ator.getStatusCarreira());
-                if (containsFilter && emAtividade) {
-                    retorno.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
-                }
+        for (Ator ator : atoresFiltrados) {
+            if (ator.getStatusCarreira().equals(StatusCarreira.EM_ATIVIDADE)) {
+                return repository.findByStatusCarreira(filtroNome);
             }
-        } else {
-            for (Ator ator : atoresCadastrados) {
-                final boolean emAtividade = StatusCarreira.EM_ATIVIDADE.equals(ator.getStatusCarreira());
-                if (emAtividade) {
-                    retorno.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
-                }
-            }
-        }
-
-        if (retorno.isEmpty()) {
-            throw new FiltroNomeNaoEncontrado("Ator", filtroNome);
-        }
-
-        return retorno;
+        } return null;
     }
-*/
+}
+
+
+
 
 /* PARTE 3
 
@@ -126,4 +105,3 @@ public class AtorService {
     }
 
 */
-}
