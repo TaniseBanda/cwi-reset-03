@@ -43,7 +43,7 @@ public class AtorController {
 
     @GetMapping ("/filtroNome/{nome}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Ator filtroNome(@PathVariable @Valid String nome) {
+    public List<Ator> filtroNome(@PathVariable @Valid String nome) {
         return atorService.filtroNome(nome);
     }
 

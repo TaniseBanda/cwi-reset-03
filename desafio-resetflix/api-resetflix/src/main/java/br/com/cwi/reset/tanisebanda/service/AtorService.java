@@ -72,8 +72,8 @@ public class AtorService {
     }
 
     //Retorno: Ator | Método: filtroNome (String nome -> para usar na lista atores em atividade)
-    public Ator filtroNome(String nome) {
-        return repository.findByNome(nome);
+    public List<Ator> filtroNome(String nome) {
+        return repository.findByNomeContainingIgnoreCase(nome);
     }
 
 /*
@@ -116,8 +116,8 @@ public class AtorService {
 
     //Retorno: void | Método: removerAtor(Integer id)
     public void removerAtor(Integer id) {
-        Ator ator = repository.findByIdEquals(id);
-        repository.delete(ator);
+        //Ator ator = repository.findByIdEquals(id);
+        repository.deleteById(id);
     }
 
     //Retorno: void | Método: atualizarAtor(Integer id, AtorRequest atorRequest)

@@ -18,13 +18,13 @@ public interface AtorRepositoryBd extends CrudRepository<Ator, Integer> {
 
     List<Ator> findAll();
 
-    Ator findByNome(String nome);
+    List<Ator> findByNomeContainingIgnoreCase(String nome);
 
 
 /*
     List<Ator> findByStatusCarreira(String filtroNome);
 
-    void delete(Integer id);
+    void deleteById (Integer id);
 
     void save(Integer id, AtorRequest atorRequest);
 
