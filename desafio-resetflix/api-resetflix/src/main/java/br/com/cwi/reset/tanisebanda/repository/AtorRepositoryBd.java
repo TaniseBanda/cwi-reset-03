@@ -13,15 +13,20 @@ import java.util.Optional;
 public interface AtorRepositoryBd extends CrudRepository<Ator, Integer> {
 
     void save(AtorRequest atorRequest);
-/*
-    List<Ator> findByStatusCarreira(String filtroNome);
 
-    Ator getById(Integer id);
+    Ator findByIdEquals(Integer id);
 
     List<Ator> findAll();
 
-    void update(Integer id, AtorRequest atorRequest);
+    Ator findByNome(String nome);
+
+
+/*
+    List<Ator> findByStatusCarreira(String filtroNome);
 
     void delete(Integer id);
+
+    void save(Integer id, AtorRequest atorRequest);
+
 */
 }

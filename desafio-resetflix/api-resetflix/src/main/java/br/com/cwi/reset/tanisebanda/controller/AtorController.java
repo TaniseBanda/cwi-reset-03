@@ -25,42 +25,52 @@ public class AtorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarAtor(@RequestBody @Valid AtorRequest atorRequest) throws Exception {
-        this.atorService.criarAtor(atorRequest);
-    }
-/*
-    @GetMapping("/em_atividade")
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<AtorEmAtividade> listarAtoresEmAtividade(@Valid String filtroNome) throws Exception {
-        return this.atorService.listarAtoresEmAtividade(filtroNome);
+    public void criarAtor(@RequestBody @Valid AtorRequest atorRequest) {
+        atorService.criarAtor(atorRequest);
     }
 
     @GetMapping ("/{id}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void consultarAtor(@PathVariable @Valid Integer id) throws Exception {
-        this.atorService.consultarAtor(id);
+    public Ator consultarAtor(@PathVariable @Valid Integer id) {
+        return atorService.consultarAtor(id);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<Ator> consultarAtores() throws Exception {
-        return this.atorService.consultarAtores();
+    public List<Ator> consultarAtores() {
+        return atorService.consultarAtores();
     }
 
-    @PutMapping
+    @GetMapping ("/filtroNome/{nome}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void atualizarAtor(@PathVariable @Valid Integer id, @PathVariable @Valid AtorRequest atorRequest) throws Exception{
-        this.atorService.atualizarAtor(id, atorRequest);
+    public Ator filtroNome(@PathVariable @Valid String nome) {
+        return atorService.filtroNome(nome);
     }
 
-    @DeleteMapping
+ /*
+    @GetMapping("/em_atividade")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void removerAtor(@PathVariable @Valid Integer id) throws Exception {
-        this.atorService.removerAtor(id);
+    public List<AtorEmAtividade> listarAtoresEmAtividade(@Valid String filtroNome) throws Exception {
+        return atorService.listarAtoresEmAtividade(filtroNome);
     }
+
+
+   // PARTE 3
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void atualizarAtor(@PathVariable @Valid Integer id, @RequestBody @Valid AtorRequest atorRequest) {
+        atorService.atualizarAtor(id, atorRequest);
+    }
+
+     @DeleteMapping("/{id}")
+     @ResponseStatus(HttpStatus.BAD_REQUEST)
+     public void removerAtor(@PathVariable @Valid Integer id) {
+         atorService.removerAtor(id);
+     }
 
 
 */
+
 
 }
 

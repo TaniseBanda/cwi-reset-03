@@ -25,7 +25,7 @@ public class AtorService {
     private AtorRepositoryBd repository;
 
     // Retorno: void | Método: criarAtor(AtorRequest atorRequest)
-    public void criarAtor(AtorRequest atorRequest) throws Exception {
+    public void criarAtor(AtorRequest atorRequest) {
         /*
         if (atorRequest.getNome().split(" ").length < 2) {
             throw new Exception("Deve ser informado no mínimo nome e sobrenome para o ator.");
@@ -57,13 +57,29 @@ public class AtorService {
 */
 
         Ator ator = new Ator( atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
-        //repository.save(ator);
+
         repository.save(ator);
     }
+
+    //Retorno: Ator | Método: consultarAtor(Integer id)
+    public Ator consultarAtor(Integer id) {
+        return repository.findByIdEquals(id);
+    }
+
+    //Retorno: List | Método: consultarAtores()
+    public List<Ator> consultarAtores() {
+        return repository.findAll();
+    }
+
+    //Retorno: Ator | Método: filtroNome (String nome -> para usar na lista atores em atividade)
+    public Ator filtroNome(String nome) {
+        return repository.findByNome(nome);
+    }
+
 /*
     //Retorno: List | Método: listarAtoresEmAtividade(String filtroNome)
-    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
-        final List<Ator> atoresCadastrados = repository.findAll();
+    public List<Ator> listarAtoresEmAtividade(String filtroNome) {
+        Ator atoresEmAtividade = repository.findByStatusCarreira(StatusCarreira.EM_ATIVIDADE.equals(repository.findByNome.getStatusCarreira());
 
         if (atoresCadastrados.isEmpty()) {
             throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
@@ -94,25 +110,20 @@ public class AtorService {
 
         return retorno;
     }
+*/
 
-    // Retorno: Ator | Método: consultarAtor(Integer id)
-    public Ator consultarAtor(Integer id) throws Exception {
-        return repository.getById(id);
-    }
-
-    //Retorno: List | Método: consultarAtores()
-    public List<Ator> consultarAtores() throws Exception {
-        return repository.findAll();
-    }
-
-    //Retorno: void | Método: atualizarAtor(Integer id, AtorRequest atorRequest)
-    public void atualizarAtor(Integer id, AtorRequest atorRequest) throws Exception{
-        repository.update(id, atorRequest);
-    }
+/* PARTE 3
 
     //Retorno: void | Método: removerAtor(Integer id)
     public void removerAtor(Integer id) {
-        repository.delete(id);
+        Ator ator = repository.findByIdEquals(id);
+        repository.delete(ator);
     }
+
+    //Retorno: void | Método: atualizarAtor(Integer id, AtorRequest atorRequest)
+    public void atualizarAtor(Integer id, AtorRequest atorRequest) {
+        repository.save(id, atorRequest);
+    }
+
 */
 }
