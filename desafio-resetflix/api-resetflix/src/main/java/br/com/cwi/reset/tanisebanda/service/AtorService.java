@@ -1,41 +1,32 @@
 package br.com.cwi.reset.tanisebanda.service;
 
-import br.com.cwi.reset.tanisebanda.FakeDatabase;
 import br.com.cwi.reset.tanisebanda.exception.*;
 import br.com.cwi.reset.tanisebanda.model.Ator;
 import br.com.cwi.reset.tanisebanda.model.StatusCarreira;
+import br.com.cwi.reset.tanisebanda.repository.AtorRepositoryBd;
 import br.com.cwi.reset.tanisebanda.request.AtorRequest;
 import br.com.cwi.reset.tanisebanda.response.AtorEmAtividade;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
+//objetivo da camada de serviço é processar as regras de negócio
+//não é responsável por persistir os dados
+//não utiliza protocolo HTTP
+@Service
 public class AtorService {
 
-    private FakeDatabase fakeDatabase;
+    // indica a camada abaixo (injeta do repository)
+    @Autowired
+    private AtorRepositoryBd repository;
 
-    public AtorService(FakeDatabase fakeDatabase) {
-        this.fakeDatabase = fakeDatabase;
-    }
-
-    public void criarAtor(AtorRequest atorRequest) throws NomeNaoInformadoException, DataNascimentoNaoInformadaException, AnoInicioAtividadeException, CampoNaoInformadoException, Exception {
-       if (atorRequest.getNome() == null){
-           throw new NomeNaoInformadoException();
-       }
-        if (atorRequest.getDataNascimento() == null){
-            throw new DataNascimentoNaoInformadaException();
-        }
-        if (atorRequest.getStatusCarreira() == null){
-            throw new CampoNaoInformadoException("statusCarreira");
-        }
-        if (atorRequest.getAnoInicioAtividade() == null){
-            throw new AnoInicioAtividadeException();
-        }
-
-        List<Ator> atores = fakeDatabase.recuperaAtores();
-
+    // Retorno: void | Método: criarAtor(AtorRequest atorRequest)
+    public void criarAtor(AtorRequest atorRequest) throws Exception {
+        /*
         if (atorRequest.getNome().split(" ").length < 2) {
             throw new Exception("Deve ser informado no mínimo nome e sobrenome para o ator.");
         }
@@ -45,25 +36,29 @@ public class AtorService {
         }
 
         Integer anoNascimento = atorRequest.getDataNascimento().getYear();
-        if (atorRequest.getAnoInicioAtividade() < anoNascimento){
+        if (atorRequest.getAnoInicioAtividade() < anoNascimento) {
             throw new Exception("Ano de início de atividade inválido para o ator cadastrado.");
         }
 
-        for (Ator atoresCadastrados: atores) {
-            if (atoresCadastrados.getNome().equalsIgnoreCase(atorRequest.getNome())) {
-                throw new Exception (String.format("Já existe um ator cadastrado para o nome %s." + atorRequest.getNome()));
+        final List<Ator> atoresCadastrados = repository.findAll();
+        for (Ator atorCadastrado : atoresCadastrados) {
+            if (atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())) {
+                throw new Exception(String.format("Já existe um ator cadastrado para o nome %s." + atorRequest.getNome()));
             }
+
+            // Integer idGerado = atoresCadastrados.size() + 1;
+
+            //Ator ator = new Ator(atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
+
+
         }
-
-        Integer idGerado = atores.size() + 1;
-
-        Ator ator = new Ator(idGerado, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
-
-        fakeDatabase.persisteAtor(ator);
+        */
+        repository.save(atorRequest);
     }
-    ///
+
+    //Retorno: List | Método: listarAtoresEmAtividade(String filtroNome)
     public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
-        final List<Ator> atoresCadastrados = fakeDatabase.recuperaAtores();
+        final List<Ator> atoresCadastrados = repository.findAll();
 
         if (atoresCadastrados.isEmpty()) {
             throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
@@ -95,30 +90,24 @@ public class AtorService {
         return retorno;
     }
 
+    // Retorno: Ator | Método: consultarAtor(Integer id)
     public Ator consultarAtor(Integer id) throws Exception {
-        if (id == null) {
-            throw new IdNaoInformado();
-        }
-
-        final List<Ator> atores = fakeDatabase.recuperaAtores();
-
-        for (Ator ator : atores) {
-            if (ator.getId().equals(id)) {
-                return ator;
-            }
-        }
-
-        throw new ConsultaIdInvalidoException(TipoDominioException.ATOR.getSingular(), id);
+        return repository.getById(id);
     }
 
+    //Retorno: List | Método: consultarAtores()
     public List<Ator> consultarAtores() throws Exception {
-        final List<Ator> atores = fakeDatabase.recuperaAtores();
+        return repository.findAll();
+    }
 
-        if (atores.isEmpty()) {
-            throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
-        }
+    //Retorno: void | Método: atualizarAtor(Integer id, AtorRequest atorRequest)
+    public void atualizarAtor(Integer id, AtorRequest atorRequest) throws Exception{
+        repository.update(id, atorRequest);
+    }
 
-        return atores;
+    //Retorno: void | Método: removerAtor(Integer id)
+    public void removerAtor(Integer id) {
+        repository.delete(id);
     }
 
 }

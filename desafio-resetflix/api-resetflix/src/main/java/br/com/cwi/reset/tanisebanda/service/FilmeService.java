@@ -16,18 +16,19 @@ import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 
 public class FilmeService {
-
+}
+/*
     private FakeDatabase fakeDatabase;
     private DiretorService diretorService;
     private EstudioService estudioService;
     private PersonagemAtorService personagemAtorService;
 
-    public FilmeService(FakeDatabase fakeDatabase) {
-        this.fakeDatabase = fakeDatabase;
-        this.diretorService = new DiretorService(fakeDatabase);
-        this.estudioService = new EstudioService(fakeDatabase);
-        this.personagemAtorService = new PersonagemAtorService(fakeDatabase);
-    }
+    //public FilmeService(FakeDatabase fakeDatabase) {
+        //this.fakeDatabase = fakeDatabase;
+        //this.diretorService = new DiretorService(fakeDatabase);
+        //this.estudioService = new EstudioService(fakeDatabase);
+        //this.personagemAtorService = new PersonagemAtorService(fakeDatabase);
+    //}
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
         final List<Filme> filmesCadastrados = fakeDatabase.recuperaFilmes();
@@ -40,9 +41,9 @@ public class FilmeService {
                 ofNullable(filmeRequest.getAnoLancamento()).orElseThrow(() -> new CampoNaoInformadoException("AnoLancamento")),
                 ofNullable(filmeRequest.getCapaFilme()).orElseThrow(() -> new CampoNaoInformadoException("capaFilme")),
                 ofNullable(filmeRequest.getGeneros()).orElseThrow(() -> new CampoNaoInformadoException("genero")),
-                diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
                 estudioService.consultarEstudio(filmeRequest.getIdEstudio()),
-                personagemAtorService.cadastrarPersonagensFilme(filmeRequest.getPersonagens()),
+                diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
+                //personagemAtorService.cadastrarPersonagensFilme(filmeRequest.getPersonagens()),
                 ofNullable(filmeRequest.getResumo()).orElseThrow(() -> new CampoNaoInformadoException("resumo"))
         );
 
@@ -167,3 +168,4 @@ public class FilmeService {
             return filmeFiltrado;
         }
     }
+*/

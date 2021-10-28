@@ -12,12 +12,14 @@ import java.util.Set;
 
 public class PersonagemAtorService {
 
+}
+/*
     private FakeDatabase fakeDatabase;
     private AtorService atorService;
 
     public PersonagemAtorService(FakeDatabase fakeDatabase) {
-        this.fakeDatabase = fakeDatabase;
-        this.atorService = new AtorService(fakeDatabase);
+        //this.fakeDatabase = fakeDatabase;
+        //this.atorService = new AtorService(fakeDatabase);
     }
 
     public PersonagemAtor cadastrarPersonagemAtor(PersonagemRequest personagemRequest) throws Exception {
@@ -44,8 +46,8 @@ public class PersonagemAtorService {
         final Set<PersonagemRequest> personagemRequestSet = new HashSet<>();
 
         for (PersonagemRequest personagemRequest : personagens) {
-
-            /**
+*/
+             /*
              * A linha: "if (personagemRequestSet.contains(personagemRequest))"
              *
              * Cai na implementação do Set abaixo
@@ -57,6 +59,7 @@ public class PersonagemAtorService {
              * PersonagemRequest.equals(PersonagemRequest);
              * {@link br.com.cwi.reset.josealencar.request.PersonagemRequest#equals(Object)}
              */
+           /*
             if (personagemRequestSet.contains(personagemRequest)) {
                 throw new Exception("Não é permitido informar o mesmo ator/personagem mais de uma vez para o mesmo filme.");
             } else {
@@ -77,3 +80,4 @@ public class PersonagemAtorService {
         return personagensAtores;
     }
 }
+*/

@@ -1,7 +1,5 @@
 package br.com.cwi.reset.tanisebanda.model;
 
-import java.util.List;
-
 public enum Genero {
     ACAO,
     AVENTURA,

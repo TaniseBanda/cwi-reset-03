@@ -12,7 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/filmes")
 public class FilmeController {
-
+}
+/*
     private FilmeService filmeService;
 
     public FilmeController() {
@@ -35,3 +36,4 @@ public class FilmeController {
     }
 
 }
+*/
