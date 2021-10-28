@@ -1,0 +1,13 @@
+br\com\cwi\reset\tanisebanda\model\Genero.class
+br\com\cwi\reset\tanisebanda\FakeDatabase.class
+br\com\cwi\reset\tanisebanda\model\Diretor.class
+br\com\cwi\reset\tanisebanda\model\Estudio.class
+br\com\cwi\reset\tanisebanda\model\PersonagemAtor.class
+br\com\cwi\reset\tanisebanda\model\TipoAtuacao.class
+br\com\cwi\reset\tanisebanda\model\StatusCarreira.class
+br\com\cwi\reset\tanisebanda\service\DiretorService.class
+br\com\cwi\reset\tanisebanda\model\Filme.class
+br\com\cwi\reset\tanisebanda\request\DiretorRequest.class
+br\com\cwi\reset\tanisebanda\controller\DiretorController.class
+br\com\cwi\reset\tanisebanda\model\Ator.class
+br\com\cwi\reset\tanisebanda\model\StatusAtividade.class

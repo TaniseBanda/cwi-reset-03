@@ -46,21 +46,16 @@ public class AtorService {
                 throw new Exception(String.format("Já existe um ator cadastrado para o nome %s." + atorRequest.getNome()));
             }
 
-            Integer idGerado = 1;
+            // Integer idGerado = atoresCadastrados.size() + 1;
 
-            Ator ator = new Ator( atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
-
-            repository.save(ator);
+            //Ator ator = new Ator(atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
 
 
         }
-*/
-
-        Ator ator = new Ator( atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
-        //repository.save(ator);
-        repository.save(ator);
+        */
+        repository.save(atorRequest);
     }
-/*
+
     //Retorno: List | Método: listarAtoresEmAtividade(String filtroNome)
     public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
         final List<Ator> atoresCadastrados = repository.findAll();
@@ -114,5 +109,5 @@ public class AtorService {
     public void removerAtor(Integer id) {
         repository.delete(id);
     }
-*/
+
 }

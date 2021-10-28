@@ -28,7 +28,7 @@ public class AtorController {
     public void criarAtor(@RequestBody @Valid AtorRequest atorRequest) throws Exception {
         this.atorService.criarAtor(atorRequest);
     }
-/*
+
     @GetMapping("/em_atividade")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public List<AtorEmAtividade> listarAtoresEmAtividade(@Valid String filtroNome) throws Exception {
@@ -60,7 +60,7 @@ public class AtorController {
     }
 
 
-*/
+
 
 }
 
